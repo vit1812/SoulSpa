@@ -1,5 +1,5 @@
 // App.js
-import React from 'react';
+import React, { useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -13,11 +13,37 @@ import MorningScreen from './components/MorningScreen';
 import BedtimeScreen from './components/BedtimeScreen';
 import SoulResetScreen from './components/SoulResetScreen';
 
+// Firebase Analytics imports
+import { initializeFirebase, logEvent, AnalyticsEvents } from './firebase';
+
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+  useEffect(() => {
+    // Initialize Firebase Analytics
+    initializeFirebase();
+    
+    // Log app open event
+    // logEvent(AnalyticsEvents.APP_OPEN, {
+    //   timestamp: new Date().toISOString(),
+    //   app_version: '1.0.0'
+    // });
+  }, []);
+
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      onStateChange={(state) => {
+        // Track screen views
+        if (state?.routes?.length > 0) {
+          const currentRoute = state.routes[state.index];
+          logEvent(AnalyticsEvents.SCREEN_VIEW, {
+            screen_name: currentRoute.name,
+            screen_class: currentRoute.name,
+            timestamp: new Date().toISOString()
+          });
+        }
+      }}
+    >
       <Tab.Navigator
         initialRouteName="Home"
         screenOptions={({ route }) => ({

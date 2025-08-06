@@ -13,6 +13,7 @@
 		41E4003588830522C782B5E3 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3341F23AD9A0A69BB423C6 /* ExpoModulesProvider.swift */; };
 		B78C458161BE36547403AFF8 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 8A9083D2C0493834D97B0FBA /* PrivacyInfo.xcprivacy */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
+		CE903C492E4369040088EEC3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE903C482E4369040088EEC3 /* GoogleService-Info.plist */; };
 		F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11748412D0307B40044C1D9 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +27,7 @@
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = SoulSpa/SplashScreen.storyboard; sourceTree = "<group>"; };
 		AE3341F23AD9A0A69BB423C6 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-SoulSpa/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
+		CE903C482E4369040088EEC3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F11748412D0307B40044C1D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = SoulSpa/AppDelegate.swift; sourceTree = "<group>"; };
 		F11748442D0722820044C1D9 /* SoulSpa-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SoulSpa-Bridging-Header.h"; path = "SoulSpa/SoulSpa-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -47,6 +49,7 @@
 		13B07FAE1A68108700A75B9A /* SoulSpa */ = {
 			isa = PBXGroup;
 			children = (
+				CE903C482E4369040088EEC3 /* GoogleService-Info.plist */,
 				F11748412D0307B40044C1D9 /* AppDelegate.swift */,
 				F11748442D0722820044C1D9 /* SoulSpa-Bridging-Header.h */,
 				BB2F792B24A3F905000567C9 /* Supporting */,
@@ -195,6 +198,7 @@
 			files = (
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				CE903C492E4369040088EEC3 /* GoogleService-Info.plist in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
 				B78C458161BE36547403AFF8 /* PrivacyInfo.xcprivacy in Resources */,
 			);
