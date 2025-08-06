@@ -11,6 +11,8 @@ import { useNavigation } from '@react-navigation/native';
 import Logo from '../SoulSpaLogo.png';
 import questions from './data/questions';
 import { Ionicons } from '@expo/vector-icons';
+// Firebase Analytics imports
+import { logEvent, AnalyticsEvents } from '../firebase';
 
 export default function HomeScreen() {
   const navigation = useNavigation();
@@ -25,7 +27,31 @@ export default function HomeScreen() {
     if (questions?.length) {
       setQuestionIndex(dayOfYear % questions.length);
     }
+
+    // Track screen view when component mounts
+    logEvent(AnalyticsEvents.SCREEN_VIEW, {
+      screen_name: 'Home',
+      screen_class: 'HomeScreen',
+      timestamp: new Date().toISOString(),
+      question_of_day: questions[dayOfYear % questions.length]?.question || ''
+    });
   }, []);
+
+  // Handle navigation with analytics tracking
+  const handleNavigation = (screenName, buttonName) => {
+    // Log button click event
+    logEvent(AnalyticsEvents.BUTTON_CLICK, {
+      button_name: buttonName,
+      screen_name: 'Home',
+      destination: screenName,
+      question_of_day: questions[questionIndex]?.question || '',
+      time_of_day: new Date().toLocaleTimeString(),
+      timestamp: new Date().toISOString()
+    });
+
+    // Navigate to the screen
+    navigation.navigate(screenName);
+  };
 
   const question = questions?.[questionIndex];
 
@@ -43,7 +69,7 @@ export default function HomeScreen() {
 
       <TouchableOpacity
         style={styles.tabButton}
-        onPress={() => navigation.navigate('SoulfulPause')}
+        onPress={() => handleNavigation('SoulfulPause', 'Soulful Pause')}
       >
         <Ionicons name="leaf" size={24} color="#6A5ACD" style={styles.icon} />
         <Text style={styles.tabText}>Soulful Pause</Text>
@@ -51,7 +77,7 @@ export default function HomeScreen() {
 
       <TouchableOpacity
         style={styles.tabButton}
-        onPress={() => navigation.navigate('Morning')}
+        onPress={() => handleNavigation('Morning', 'Morning Centering')}
       >
         <Ionicons name="sunny" size={24} color="#F5A623" style={styles.icon} />
         <Text style={styles.tabText}>Morning Centering</Text>
@@ -59,7 +85,7 @@ export default function HomeScreen() {
 
       <TouchableOpacity
         style={styles.tabButton}
-        onPress={() => navigation.navigate('Bedtime')}
+        onPress={() => handleNavigation('Bedtime', 'Bedtime Peace')}
       >
         <Ionicons name="moon" size={24} color="#8E44AD" style={styles.icon} />
         <Text style={styles.tabText}>Bedtime Peace</Text>
@@ -67,7 +93,7 @@ export default function HomeScreen() {
 
       <TouchableOpacity
         style={styles.tabButton}
-        onPress={() => navigation.navigate('SoulReset')}
+        onPress={() => handleNavigation('SoulReset', 'Soul Reset')}
       >
         <Ionicons
           name="refresh-circle"
