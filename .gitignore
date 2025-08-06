@@ -3,3 +3,5 @@ package-lock.json
 Pausemusicbreath-of-life.mp3
 SoulSpaLogo.png
 SoulSpaLogoSilver.png
+ios/SoulSpa.xcodeproj/xcshareddata
+Podfile.lock
