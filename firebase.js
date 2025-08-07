@@ -4,32 +4,22 @@ import analytics from '@react-native-firebase/analytics';
 // Initialize Firebase Core
 export const initializeFirebase = async () => {
   try {
-    initializeApp();
-    await new Promise(resolve => setTimeout(resolve, 100)); // đợi Firebase ổn định
-
-    if (getApps().length === 0) {
-      console.log('Firebase Analytics app = 0');
-    }
-
-    // const app = getApp();
-    // console.log('Firebase initialized:', app.name);
-
     // Enable analytics collection
-    // await analytics().setAnalyticsCollectionEnabled(true);
+    await analytics().setAnalyticsCollectionEnabled(true);
     console.log('Firebase Analytics initialized successfully');
   } catch (error) {
-    console.error('Error initializing Firebase:', error);
+    console.error('Error initializing Firebase Analytics:', error);
   }
 };
 
 // Helper function to log custom events
 export const logEvent = async (eventName, parameters = {}) => {
-  // try {
-  //   await analytics().logEvent(eventName, parameters);
-  //   console.log(`Analytics event logged: ${eventName}`, parameters);
-  // } catch (error) {
-  //   console.error('Error logging analytics event:', error);
-  // }
+  try {
+    await analytics().logEvent(eventName, parameters);
+    console.log(`Analytics event logged: ${eventName}`, parameters);
+  } catch (error) {
+    console.error('Error logging analytics event:', error);
+  }
 };
 
 // Helper function to set user properties

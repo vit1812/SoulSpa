@@ -24,10 +24,10 @@ export default function App() {
     initializeFirebase();
     
     // Log app open event
-    // logEvent(AnalyticsEvents.APP_OPEN, {
-    //   timestamp: new Date().toISOString(),
-    //   app_version: '1.0.0'
-    // });
+    logEvent(AnalyticsEvents.APP_OPEN, {
+      timestamp: new Date().toISOString(),
+      app_version: '1.0.0'
+    });
   }, []);
 
   return (
