@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -11,6 +11,8 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import bedtimeAffirmations from './data/BedtimeAffirmations';
+// Firebase Analytics imports
+import { logEvent, AnalyticsEvents } from '../firebase';
 
 export default function BedtimeScreen() {
   const navigation = useNavigation();
@@ -18,7 +20,23 @@ export default function BedtimeScreen() {
   const [submitted, setSubmitted] = useState(false);
   const [affirmation, setAffirmation] = useState('');
 
+  useEffect(() => {
+    // Track screen view when component mounts
+    logEvent(AnalyticsEvents.SCREEN_VIEW, {
+      screen_name: 'Bedtime',
+      screen_class: 'BedtimeScreen',
+      timestamp: new Date().toISOString()
+    });
+  }, []);
+
   const handleRelease = () => {
+    // Log release event
+    logEvent('bedtime_release_submitted', {
+      text_length: inputText.length,
+      screen_name: 'Bedtime',
+      timestamp: new Date().toISOString()
+    });
+
     const randomAffirmation =
       bedtimeAffirmations[Math.floor(Math.random() * bedtimeAffirmations.length)];
     setAffirmation(randomAffirmation);
@@ -27,7 +45,25 @@ export default function BedtimeScreen() {
   };
 
   const handleReleaseAnother = () => {
+    // Log release another event
+    logEvent('bedtime_release_another', {
+      screen_name: 'Bedtime',
+      timestamp: new Date().toISOString()
+    });
+
     setSubmitted(false);
+  };
+
+  // Handle navigation with analytics
+  const handleNavigation = (target) => {
+    // Log navigation event
+    logEvent('bedtime_navigation', {
+      destination: target,
+      screen_name: 'Bedtime',
+      timestamp: new Date().toISOString()
+    });
+
+    navigation.navigate(target);
   };
 
   return (
@@ -59,23 +95,23 @@ export default function BedtimeScreen() {
       )}
 
       <View style={styles.navButtons}>
-        <TouchableOpacity onPress={() => navigation.navigate('Home')} style={styles.tab}>
+        <TouchableOpacity onPress={() => handleNavigation('Home')} style={styles.tab}>
           <Ionicons name="home" size={24} color="#4B0082" />
           <Text style={styles.navText}>Home</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Pause')} style={styles.tab}>
+        <TouchableOpacity onPress={() => handleNavigation('Pause')} style={styles.tab}>
           <Ionicons name="leaf" size={24} color="#4B0082" />
           <Text style={styles.navText}>Soulful Pause</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Morning')} style={styles.tab}>
+        <TouchableOpacity onPress={() => handleNavigation('Morning')} style={styles.tab}>
           <Ionicons name="sunny" size={24} color="#4B0082" />
           <Text style={styles.navText}>Morning Centering</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Bedtime')} style={styles.tab}>
+        <TouchableOpacity onPress={() => handleNavigation('Bedtime')} style={styles.tab}>
           <Ionicons name="moon" size={24} color="#4B0082" />
           <Text style={styles.navText}>Bedtime Peace</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('SoulReset')} style={styles.tab}>
+        <TouchableOpacity onPress={() => handleNavigation('SoulReset')} style={styles.tab}>
           <Ionicons name="refresh-circle" size={24} color="#4B0082" />
           <Text style={styles.navText}>Soul Reset</Text>
         </TouchableOpacity>

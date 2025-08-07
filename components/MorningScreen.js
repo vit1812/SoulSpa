@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -11,6 +11,8 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import MorningAffirmations from './data/MorningAffirmations';
+// Firebase Analytics imports
+import { logEvent, AnalyticsEvents } from '../firebase';
 
 export default function MorningScreen() {
   const navigation = useNavigation();
@@ -24,14 +26,48 @@ export default function MorningScreen() {
 
   const [affirmation, setAffirmation] = useState(getRandomAffirmation());
 
+  useEffect(() => {
+    // Track screen view when component mounts
+    logEvent(AnalyticsEvents.SCREEN_VIEW, {
+      screen_name: 'Morning',
+      screen_class: 'MorningScreen',
+      timestamp: new Date().toISOString()
+    });
+  }, []);
+
   const handleSubmit = () => {
+    // Log intention submission event
+    logEvent('morning_intention_submitted', {
+      intention_length: intention.length,
+      screen_name: 'Morning',
+      timestamp: new Date().toISOString()
+    });
+
     setAffirmation(getRandomAffirmation());
     setSubmitted(true);
   };
 
   const resetEntry = () => {
+    // Log reset entry event
+    logEvent('morning_intention_reset', {
+      screen_name: 'Morning',
+      timestamp: new Date().toISOString()
+    });
+
     setIntention('');
     setSubmitted(false);
+  };
+
+  // Handle navigation with analytics
+  const handleNavigation = (target) => {
+    // Log navigation event
+    logEvent('morning_navigation', {
+      destination: target,
+      screen_name: 'Morning',
+      timestamp: new Date().toISOString()
+    });
+
+    navigation.navigate(target);
   };
 
   return (
@@ -82,7 +118,7 @@ export default function MorningScreen() {
         ].map(({ label, target }) => (
           <TouchableOpacity
             key={label}
-            onPress={() => navigation.navigate(target)}
+            onPress={() => handleNavigation(target)}
           >
             <Text style={styles.navButton}>{label}</Text>
           </TouchableOpacity>

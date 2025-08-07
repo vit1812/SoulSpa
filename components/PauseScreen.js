@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -6,6 +6,8 @@ import {
   StyleSheet,
   Dimensions,
 } from 'react-native';
+// Firebase Analytics imports
+import { logEvent, AnalyticsEvents } from '../firebase';
 
 const { height } = Dimensions.get('window');
 
@@ -15,6 +17,64 @@ export default function PauseScreen({ navigation }) {
 
   const durations = [1, 3, 5];
   const modes = ['guided', 'music', 'silent'];
+
+  useEffect(() => {
+    // Track screen view when component mounts
+    logEvent(AnalyticsEvents.SCREEN_VIEW, {
+      screen_name: 'Pause',
+      screen_class: 'PauseScreen',
+      timestamp: new Date().toISOString()
+    });
+  }, []);
+
+  // Handle duration selection with analytics
+  const handleDurationSelect = (selectedDuration) => {
+    setDuration(selectedDuration);
+    
+    // Log duration selection event
+    logEvent('pause_duration_selected', {
+      duration: selectedDuration,
+      screen_name: 'Pause',
+      timestamp: new Date().toISOString()
+    });
+  };
+
+  // Handle mode selection with analytics
+  const handleModeSelect = (selectedMode) => {
+    setMode(selectedMode);
+    
+    // Log mode selection event
+    logEvent('pause_mode_selected', {
+      mode: selectedMode,
+      screen_name: 'Pause',
+      timestamp: new Date().toISOString()
+    });
+  };
+
+  // Handle start session with analytics
+  const handleStartSession = () => {
+    // Log session start event
+    logEvent(AnalyticsEvents.SESSION_START, {
+      duration: duration,
+      mode: mode,
+      screen_name: 'Pause',
+      timestamp: new Date().toISOString()
+    });
+
+    // Navigate to session screen
+    navigation.navigate('PauseSession', { duration, mode });
+  };
+
+  // Handle return home with analytics
+  const handleReturnHome = () => {
+    // Log return home event
+    logEvent('pause_return_home', {
+      screen_name: 'Pause',
+      timestamp: new Date().toISOString()
+    });
+
+    navigation.navigate('Home');
+  };
 
   return (
     <View style={styles.container}>
@@ -31,7 +91,7 @@ export default function PauseScreen({ navigation }) {
               styles.optionButton,
               duration === d && styles.optionButtonSelected,
             ]}
-            onPress={() => setDuration(d)}
+            onPress={() => handleDurationSelect(d)}
           >
             <Text
               style={[
@@ -54,7 +114,7 @@ export default function PauseScreen({ navigation }) {
               styles.optionButton,
               mode === m && styles.optionButtonSelected,
             ]}
-            onPress={() => setMode(m)}
+            onPress={() => handleModeSelect(m)}
           >
             <Text
               style={[
@@ -70,12 +130,12 @@ export default function PauseScreen({ navigation }) {
 
       <TouchableOpacity
         style={styles.startButton}
-        onPress={() => navigation.navigate('PauseSession', { duration, mode })}
+        onPress={handleStartSession}
       >
         <Text style={styles.startButtonText}>Start</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+      <TouchableOpacity onPress={handleReturnHome}>
         <Text style={styles.returnText}>Return Home</Text>
       </TouchableOpacity>
     </View>

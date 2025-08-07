@@ -1,5 +1,5 @@
 // components/SoulResetScreen.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ScrollView,
   View,
@@ -11,6 +11,8 @@ import {
   Linking,
   SafeAreaView,
 } from 'react-native';
+// Firebase Analytics imports
+import { logEvent, AnalyticsEvents } from '../firebase';
 
 const { width } = Dimensions.get('window');
 const CARD_WIDTH = width * 0.75;
@@ -42,6 +44,15 @@ const affirmations = [
 
 export default function SoulResetScreen({ navigation }) {
   const [showAffirmations, setShowAffirmations] = useState(false);
+
+  useEffect(() => {
+    // Track screen view when component mounts
+    logEvent(AnalyticsEvents.SCREEN_VIEW, {
+      screen_name: 'SoulReset',
+      screen_class: 'SoulResetScreen',
+      timestamp: new Date().toISOString()
+    });
+  }, []);
 
   const sections = [
     {
@@ -91,9 +102,39 @@ export default function SoulResetScreen({ navigation }) {
     },
   ];
 
-  const openYouTube = (videoId) => {
+  const openYouTube = (videoId, videoLabel) => {
+    // Log video click event
+    logEvent('soulreset_video_clicked', {
+      video_id: videoId,
+      video_label: videoLabel,
+      screen_name: 'SoulReset',
+      timestamp: new Date().toISOString()
+    });
+
     const url = `https://youtu.be/${videoId}`;
     Linking.openURL(url).catch(() => console.warn("Can't open URL", url));
+  };
+
+  const handleAffirmationsToggle = () => {
+    const newState = !showAffirmations;
+    setShowAffirmations(newState);
+    
+    // Log affirmations toggle event
+    logEvent('soulreset_affirmations_toggle', {
+      show_affirmations: newState,
+      screen_name: 'SoulReset',
+      timestamp: new Date().toISOString()
+    });
+  };
+
+  const handleReturnHome = () => {
+    // Log return home event
+    logEvent('soulreset_return_home', {
+      screen_name: 'SoulReset',
+      timestamp: new Date().toISOString()
+    });
+
+    navigation.navigate('Home');
   };
 
   return (
@@ -110,7 +151,7 @@ export default function SoulResetScreen({ navigation }) {
               />
               <TouchableOpacity
                 style={styles.linkButton}
-                onPress={() => openYouTube(v.id)}
+                onPress={() => openYouTube(v.id, v.label)}
               >
                 <Text style={styles.linkText}>▶ {v.label}</Text>
               </TouchableOpacity>
@@ -121,7 +162,7 @@ export default function SoulResetScreen({ navigation }) {
 
       <TouchableOpacity
         style={styles.affToggle}
-        onPress={() => setShowAffirmations((s) => !s)}
+        onPress={handleAffirmationsToggle}
       >
         <Text style={styles.sectionTitle}>
           {showAffirmations ? 'Hide Daily Affirmations' : 'Healing Daily Affirmations'}
@@ -139,7 +180,7 @@ export default function SoulResetScreen({ navigation }) {
 
               <TouchableOpacity
           style={styles.homeButton}
-          onPress={() => navigation.navigate('Home')}
+          onPress={handleReturnHome}
         >
           <Text style={styles.homeButtonText}>Return Home</Text>
         </TouchableOpacity>
