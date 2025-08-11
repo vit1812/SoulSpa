@@ -5,3 +5,9 @@ SoulSpaLogo.png
 SoulSpaLogoSilver.png
 ios/SoulSpa.xcodeproj/xcshareddata
 Podfile.lock
+android/app/src/main/res
+android/gradle/wrapper
+ios/SoulSpa/Images.xcassets
+adaptive-icon.png
+favicon.png
+splash-icon.png
