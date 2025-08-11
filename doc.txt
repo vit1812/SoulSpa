@@ -1,0 +1,8 @@
+keystore password: akjhkjahdkjah!@#ABdgf
+first and last name: Luong Vinh
+name of organizationl unit: SoulSpa
+name of your organization: SoulSpa
+name of your city or locality: Ha noi
+name of your state or province: Ha noi
+two-letter country code for this unit: VN
+password for my-key-alias: zbca!@73GSqwejkhqkeh
