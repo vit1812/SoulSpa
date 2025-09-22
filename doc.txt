@@ -6,3 +6,6 @@ name of your city or locality: Ha noi
 name of your state or province: Ha noi
 two-letter country code for this unit: VN
 password for my-key-alias: zbca!@73GSqwejkhqkeh
+
+Build APK release (mặc định)
+bash scripts/build_android_apk.sh --gradle-zip /tmp/gradle-8.12-bin.zip
