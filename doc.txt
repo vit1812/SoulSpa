@@ -9,3 +9,39 @@ password for my-key-alias: zbca!@73GSqwejkhqkeh
 
 Build APK release (mặc định)
 bash scripts/build_android_apk.sh --gradle-zip /tmp/gradle-8.12-bin.zip
+
+
+
+
+Tôi cần bạn giúp một việc trong phần mã của ứng dụng. Giữ nguyên mọi thứ ngoại trừ việc tôi phải loại bỏ các tùy chọn âm nhạc (vì vấn đề bản quyền).
+Vì vậy, hiện tại ứng dụng chỉ nên có các lựa chọn nghỉ 1, 3, 4 và 5 phút (cho đến khi tôi cập nhật lại).
+Tôi đã đính kèm các tệp âm thanh cho các khoảng nghỉ này.
+Ứng dụng sẽ chỉ có các khoảng nghỉ có hướng dẫn và khoảng nghỉ im lặng, không có nhạc.
+Ngoài ra, tuần trước tôi đã nâng quyền của bạn lên “app manager” để bạn có thể tải ứng dụng lên, v.v.
+Vui lòng để tôi xem qua trước khi xuất bản nhé!
+
+
+I need your help with something in the app code.  Keeping everything the same EXCEPT I have to take away the music options (copyright issue with music).  So the app should have 1,3,4,5 minute break options for now (until I update).  Here are those audio selections for the breaks (attached).  It will have guided breaks and silent breaks only (not music).  Also, I upgraded your role to app manager to be able to upload apps etc. last week.  
+Please let me look it over before publishing!  
+
+
+
+Đính kèm là một đoạn nghỉ hai phút để người dùng có thể chọn trên trang ứng dụng, sau đó sẽ dẫn họ đến bong bóng hít thở trong khi nghe (hoặc giữ im lặng).
+Vì vậy, nó nên có các tùy chọn “Hướng dẫn” hoặc “Im lặng” với thời lượng 1, 2, 3, 4 hoặc 5 phút.
+Đối với phần “Hướng dẫn”, các bài sẽ là:
+1 phút: Grounding (Giữ vững)
+2 phút: Energy (Năng lượng)
+3 phút: Refresh (Làm mới)
+4 phút: Creativity (Sáng tạo)
+5 phút: Clarity (Minh mẫn)
+Vui lòng cho tôi biết khi nào nó sẵn sàng để xem lại trước khi xuất bản nhé!
+Cảm ơn rất nhiều!!!
+
+
+Attached is a two minute break for people to choose from on that app page that then leads them to the breathing bubble while they listen (or remain silent).  
+So it should have the options of Guided or Silent Pauses 1, 2, 3, 4, or 5 minutes.   
+For the guided, it will be: 
+One Minute Grounding, Two Minute Energy, 3 Minute Refresh, 4 Minute Creativity, and 5 Minute Clarity 
+Please let me know when it is ready to review before publishing!  
+
+
