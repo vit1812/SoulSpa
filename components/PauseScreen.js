@@ -15,8 +15,8 @@ export default function PauseScreen({ navigation }) {
   const [duration, setDuration] = useState(1);
   const [mode, setMode] = useState('guided'); // 'guided' | 'music' | 'silent'
 
-  const durations = [1, 3, 5];
-  const modes = ['guided', 'music', 'silent'];
+  const durations = [1, 2, 3, 4, 5];
+  const modes = ['guided', 'silent'];
 
   useEffect(() => {
     // Track screen view when component mounts
@@ -168,6 +168,9 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    width: '100%',
     marginBottom: 24,
   },
   optionButton: {
@@ -177,6 +180,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 16,
     marginHorizontal: 8,
+    marginVertical: 6,
     backgroundColor: '#F3E5F5',
   },
   optionButtonSelected: {
