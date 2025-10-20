@@ -14,7 +14,8 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.lionking.soulspa"
+      "bundleIdentifier": "com.lionking.soulspa",
+      "buildNumber": "1"
     },
     "android": {
       "adaptiveIcon": {
@@ -22,7 +23,8 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.lionking.soulspa"
+      "package": "com.lionking.soulspa",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
