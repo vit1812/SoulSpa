@@ -11,6 +11,14 @@ import {
 } from 'react-native';
 import { Audio } from 'expo-av';
 
+const guidedAudioMap = {
+  1: require('../assets/sounds/1-min-Clarity.mp3'),
+  2: require('../assets/sounds/2-min-Energy.mp3'),
+  3: require('../assets/sounds/3-Minute.mp3'),
+  4: require('../assets/sounds/4-Min-Creativity-Reset.mp3'),
+  5: require('../assets/sounds/5-Minute-Clarity.mp3'),
+};
+
 export default function PauseSessionScreen({ route, navigation }) {
   const { duration, mode } = route.params;
   const [countdown, setCountdown] = useState(duration * 60);
@@ -49,12 +57,16 @@ export default function PauseSessionScreen({ route, navigation }) {
       ])
     ).start();
 
-    // 3. Play music if selected
+    // 3. Play guided session if selected
     (async () => {
-      if (mode === 'music') {
+      if (mode === 'guided') {
         try {
-          await sound.loadAsync(require('../Pausemusicbreath-of-life.mp3'));
-          await sound.setIsLoopingAsync(true);
+          const guidedTrack = guidedAudioMap[duration];
+          if (!guidedTrack) {
+            console.warn(`No guided track configured for duration: ${duration}`);
+            return;
+          }
+          await sound.loadAsync(guidedTrack);
           await sound.playAsync();
         } catch (e) {
           console.warn('Audio load error', e);
@@ -65,7 +77,7 @@ export default function PauseSessionScreen({ route, navigation }) {
     // cleanup on unmount
     return () => {
       clearInterval(countdownInterval);
-      sound.unloadAsync();
+      sound.unloadAsync().catch(() => {});
     };
   }, []);
 

@@ -13,7 +13,7 @@ const { height } = Dimensions.get('window');
 
 export default function PauseScreen({ navigation }) {
   const [duration, setDuration] = useState(1);
-  const [mode, setMode] = useState('guided'); // 'guided' | 'music' | 'silent'
+  const [mode, setMode] = useState('guided'); // 'guided' | 'silent'
 
   const durations = [1, 2, 3, 4, 5];
   const modes = ['guided', 'silent'];
