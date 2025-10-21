@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.lionking.soulspa</string>
+	<string>com.soulspa.soulspa</string>
 	<key>PROJECT_ID</key>
 	<string>soulspa-7b765</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:314959323658:ios:d22b1b03c2030df2bab5f3</string>
+	<string>1:314959323658:ios:7057bb2673ac6fa4bab5f3</string>
 </dict>
 </plist>
