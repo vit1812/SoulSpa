@@ -9,3 +9,5 @@ password for my-key-alias: zbca!@73GSqwejkhqkeh
 
 Build APK release (mặc định)
 bash scripts/build_android_apk.sh --gradle-zip /tmp/gradle-8.12-bin.zip
+
+npm run ios
