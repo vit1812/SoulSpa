@@ -109,21 +109,6 @@ export default function MorningScreen() {
         </>
       )}
 
-      <View style={styles.bottomNav}>
-        {[
-          { label: 'Home', target: 'Home' },
-          { label: 'Bedtime', target: 'Bedtime' },
-          { label: 'Soulful Pause', target: 'SoulfulPause' },
-          { label: 'Soul Reset', target: 'SoulReset' },
-        ].map(({ label, target }) => (
-          <TouchableOpacity
-            key={label}
-            onPress={() => handleNavigation(target)}
-          >
-            <Text style={styles.navButton}>{label}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
     </KeyboardAvoidingView>
     </SafeAreaView>
   );
