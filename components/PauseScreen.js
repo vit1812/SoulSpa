@@ -16,6 +16,7 @@ export default function PauseScreen({ navigation }) {
   const [mode, setMode] = useState('guided'); // 'guided' | 'silent'
 
   const durations = [1, 2, 3, 4, 5];
+  const durationRows = [durations.slice(0, 2), durations.slice(2)];
   const modes = ['guided', 'silent'];
 
   useEffect(() => {
@@ -83,25 +84,36 @@ export default function PauseScreen({ navigation }) {
         Even one quiet moment can return you to yourself.
       </Text>
 
-      <View style={styles.row}>
-        {durations.map((d) => (
-          <TouchableOpacity
-            key={d}
+      <View style={styles.durationWrapper}>
+        {durationRows.map((rowDurations, rowIndex) => (
+          <View
+            key={`duration-row-${rowIndex}`}
             style={[
-              styles.optionButton,
-              duration === d && styles.optionButtonSelected,
+              styles.row,
+              styles.durationRow,
+              rowIndex === durationRows.length - 1 && styles.durationRowLast,
             ]}
-            onPress={() => handleDurationSelect(d)}
           >
-            <Text
-              style={[
-                styles.optionText,
-                duration === d && styles.optionTextSelected,
-              ]}
-            >
-              {d} min
-            </Text>
-          </TouchableOpacity>
+            {rowDurations.map((d) => (
+              <TouchableOpacity
+                key={d}
+                style={[
+                  styles.optionButton,
+                  duration === d && styles.optionButtonSelected,
+                ]}
+                onPress={() => handleDurationSelect(d)}
+              >
+                <Text
+                  style={[
+                    styles.optionText,
+                    duration === d && styles.optionTextSelected,
+                  ]}
+                >
+                  {d} min
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
         ))}
       </View>
 
@@ -166,6 +178,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
     textAlign: 'center',
   },
+  durationWrapper: {
+    width: '100%',
+    alignItems: 'center',
+  },
+  durationRow: {
+    marginBottom: 12,
+  },
+  durationRowLast: {
+    marginBottom: 24,
+  },
   row: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -181,7 +203,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     marginHorizontal: 8,
     marginVertical: 6,
-    backgroundColor: '#F3E5F5',
+    backgroundColor: '#ffffff',
   },
   optionButtonSelected: {
     backgroundColor: '#6A5ACD',
