@@ -117,11 +117,11 @@ export default function MorningScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#FFFBEA',
+    backgroundColor: 'rgb(113, 173, 184)',
   },
   container: {
     flex: 1,
-    backgroundColor: '#FFFBEA',
+    backgroundColor: 'rgb(113, 173, 184)',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,

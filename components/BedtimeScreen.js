@@ -90,10 +90,10 @@ export default function BedtimeScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#FFFBEA",
+    backgroundColor: "#E6E6FA",
   },
   container: {
-    backgroundColor: "#FFFBEA",
+    backgroundColor: "#E6E6FA",
     flexGrow: 1,
     paddingBottom: 40,
     paddingHorizontal: 20,
